@@ -22,14 +22,14 @@ except ModuleNotFoundError:
     _HAS_RASTERIO = False
 
 # Import input/output functions
-import pysheds.io
+import pysheds.pysheds.io
 
 # Import viewing functions
-from pysheds.sview import Raster, MultiRaster
-from pysheds.sview import View, ViewFinder
+from pysheds.pysheds.sview import Raster, MultiRaster
+from pysheds.pysheds.sview import View, ViewFinder
 
 # Import numba functions
-import pysheds._sgrid as _self
+import pysheds.pysheds._sgrid as _self
 from . import projection
 
 class sGrid():
@@ -255,7 +255,7 @@ class sGrid():
         out : Raster
             Raster object containing loaded data.
         """
-        return pysheds.io.read_raster(data=data, band=band, window=window,
+        return pysheds.pysheds.io.read_raster(data=data, band=band, window=window,
                                       window_crs=window_crs, metadata=metadata,
                                       mask_geometry=mask_geometry, **kwargs)
 
@@ -593,8 +593,8 @@ class sGrid():
                  angle (from 0 to 2 pi radians).
         """
         default_metadata = {'dirmap' : dirmap, 'flats' : flats, 'pits' : pits}
-        input_overrides = {'dtype' : np.float64, 'nodata' : dem.nodata}
-        kwargs.update(input_overrides)
+        #input_overrides = {'dtype' : np.float64, 'nodata' : dem.nodata}
+        #kwargs.update(input_overrides)
         dem = self._input_handler(dem, **kwargs)
         nodata_cells = self._get_nodata_cells(dem)
         if routing.lower() == 'd8':
@@ -2372,7 +2372,7 @@ class sGrid():
             assert isinstance(mask, Raster)
         except:
             raise TypeError('`mask` must be a Raster instance.')
-        mask_overrides = {'dtype' : np.bool_, 'nodata' : False}
+        mask_overrides = {'dtype' : np.bool_, 'nodata' : np.bool(False)}
         kwargs.update(mask_overrides)
         mask = self._input_handler(mask, **kwargs)
         affine = mask.affine
