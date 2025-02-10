@@ -599,7 +599,7 @@ class sGrid():
         nodata_cells = self._get_nodata_cells(dem)
         if routing.lower() == 'd8':
             if nodata_out is None:
-                nodata_out = 0
+                nodata_out = np.int64(0) 
             fdir = self._d8_flowdir(dem=dem, nodata_cells=nodata_cells,
                                     nodata_out=nodata_out, flats=flats,
                                     pits=pits, dirmap=dirmap)
@@ -819,7 +819,7 @@ class sGrid():
         return catch
 
     def accumulation(self, fdir, weights=None, dirmap=(64, 128, 1, 2, 4, 8, 16, 32),
-                     nodata_out=0., efficiency=None, routing='d8', cycle_size=1,
+                     nodata_out=None, efficiency=None, routing='d8', cycle_size=1,
                      algorithm='iterative', **kwargs):
         """
         Generates a flow accumulation raster. If no weights are provided, the value of each cell
@@ -864,6 +864,8 @@ class sGrid():
         acc : Raster
               Raster indicating the (weighted) accumulation at each cell.
         """
+        if nodata_out is None:
+            nodata_out = np.int64(0)
         if routing.lower() == 'd8':
             fdir_overrides = {'dtype' : np.int64, 'nodata' : fdir.nodata}
         elif routing.lower() == 'dinf':
