@@ -362,7 +362,7 @@ class sGrid():
         """
         if target_view is None:
             target_view = self.viewfinder
-        return pysheds.io.to_raster(data, file_name, target_view=target_view,
+        return pysheds.pysheds.io.to_raster(data, file_name, target_view=target_view,
                                     profile=profile, blockxsize=blockxsize,
                                     blockysize=blockysize,
                                     interpolation=interpolation,
