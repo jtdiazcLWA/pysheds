@@ -660,7 +660,7 @@ class sGrid():
                                     mask=new_mask)
 
     def catchment(self, x, y, fdir, pour_value=None, dirmap=(64, 128, 1, 2, 4, 8, 16, 32),
-                  nodata_out=False, xytype='coordinate', routing='d8', snap='corner',
+                  nodata_out=None, xytype='coordinate', routing='d8', snap='corner',
                   algorithm='iterative', **kwargs):
         """
         Delineates a watershed from a given pour point (x, y).
@@ -711,6 +711,9 @@ class sGrid():
                 np.bool_, unless `pour_value` is specified, in which case the dtype will
                 be the smallest dtype capable of representing the pour value.
         """
+        if nodata_out is None:
+            nodata_out = np.False_
+
         if routing.lower() == 'd8':
             input_overrides = {'dtype' : np.int64, 'nodata' : fdir.nodata}
         elif routing.lower() == 'dinf':
