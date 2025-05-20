@@ -4,6 +4,6 @@ try:
 except ModuleNotFoundError:
     _HAS_NUMBA = False
 if _HAS_NUMBA:
-    from pysheds.pysheds.sgrid import sGrid as Grid  # noqa: F401
+    from pysheds.sgrid import sGrid as Grid  # noqa: F401
 else:
     from pysheds.pgrid import Grid as Grid  # noqa: F401

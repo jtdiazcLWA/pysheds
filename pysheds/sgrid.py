@@ -22,14 +22,14 @@ except ModuleNotFoundError:
     _HAS_RASTERIO = False
 
 # Import input/output functions
-import pysheds.pysheds.io
+import pysheds.io
 
 # Import viewing functions
-from pysheds.pysheds.sview import Raster, MultiRaster
-from pysheds.pysheds.sview import View, ViewFinder
+from pysheds.sview import Raster, MultiRaster
+from pysheds.sview import View, ViewFinder
 
 # Import numba functions
-import pysheds.pysheds._sgrid as _self
+import pysheds._sgrid as _self
 from . import projection
 
 class sGrid():
