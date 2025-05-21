@@ -255,7 +255,7 @@ class sGrid():
         out : Raster
             Raster object containing loaded data.
         """
-        return pysheds.pysheds.io.read_raster(data=data, band=band, window=window,
+        return pysheds.io.read_raster(data=data, band=band, window=window,
                                       window_crs=window_crs, metadata=metadata,
                                       mask_geometry=mask_geometry, **kwargs)
 
